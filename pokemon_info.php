@@ -41,7 +41,7 @@ if (@isset($_POST["zoekPokemon"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon info</title>
-    <link rel="stylesheet" href="pokemoninfo.css">
+    <link rel="stylesheet" href="Styles/pokemoninfo.css">
 </head>
 <body>
     <a class="back-bttn" href="index.php">X</a>

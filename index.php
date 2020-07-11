@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="Styles/style.css">
 </head>
 <body>
     
@@ -13,9 +13,9 @@
             <img class="bg-image" src="Images/pokemon-bg.jpg" alt="Pokemon background image">
         </div>
         <h1>Pokédex</h1>
-        <form autocomplete="off" action="pokemon_info.php" method="post">
-            <input type="text" name="pokemon" placeholder="Enter a pokémon name">
-            <input type="submit" name="zoekPokemon" value="Search">
+        <form autocomplete="off" action="objects/pokemon.php" method="post">
+            <input type="text" name="pokemon" placeholder="Voer een pokémon naam of id in">
+            <input type="submit" name="zoekPokemon" value="Zoek">
         </form>
     </header>
 
@@ -36,7 +36,7 @@
                     amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,,
                 </p>
                 <br><br><br>
-                <button type="submit">Alle Pokémons</button>
+                <button type="submit">Zoek een pokemon</button>
             </div>
         </div>
     </main>
