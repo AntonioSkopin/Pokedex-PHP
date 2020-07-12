@@ -33,7 +33,7 @@ body {
     display: flex;
     flex-direction: row;
     width: 50vw;
-    background-color: #f3f3f3;
+    background-color: #fff;
     border-radius: 5px;
     margin-top: 5rem;
 }
@@ -50,3 +50,44 @@ img {
     display: flex;
     flex-direction: row;
 }
+
+.type-container {
+    display: flex;
+    flex-direction: row;
+}
+
+/* Form Styles */
+.search-container {
+    padding: 1rem;
+    margin-top: 0.5rem;
+    border-radius: 10px;
+    background-color: #fff;
+}
+
+input {
+    border: none;
+    padding: 0.75rem;
+    width: 15vw;
+}
+
+input[type="text"] {
+    border: 1px solid #333;
+    border-radius: 10px;
+}
+
+input[type="submit"] {
+    width: 7.5vw;
+    background-color: #FF5A5A;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #ff3c3c;
+    transition: 0.8s;
+}
+
+input:focus {
+    outline: none;
+}
+/* Form styles */

@@ -5,6 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex</title>
     <link rel="stylesheet" href="Styles/style.css">
+    <link rel="icon" 
+      type="image/png" 
+      href="Images/pokeball.png">
 </head>
 <body>
     
@@ -13,7 +16,7 @@
             <img class="bg-image" src="Images/pokemon-bg.jpg" alt="Pokemon background image">
         </div>
         <h1>Pokédex</h1>
-        <form autocomplete="off" action="objects/pokemon.php" method="post">
+        <form autocomplete="off" action="pokemon.php" method="post">
             <input type="text" name="pokemon" placeholder="Voer een pokémon naam of id in">
             <input type="submit" name="zoekPokemon" value="Zoek">
         </form>
