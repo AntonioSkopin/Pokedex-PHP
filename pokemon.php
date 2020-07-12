@@ -5,7 +5,10 @@ if (@isset($_POST["zoekPokemon"])) {
     // lowercase inputted text (All pokemon names are lowercased in API)
     $pokemonNaam = strtolower($_POST["pokemon"]);
 
-    include_once "../config/database.php";
+    // Get pokemon type
+    $pokemonType = null;
+
+    include_once "config/database.php";
     $database = new Database();
     $conn = $database->getConnection();
 
@@ -116,23 +119,46 @@ if (@isset($_POST["zoekPokemon"])) {
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokemon Info</title>
-    <link rel="stylesheet" href="../Styles/aaa.css">
+    <link rel="stylesheet" href="Styles/pokemon_info.css">
     <link rel="icon" 
       type="image/png" 
       href="../Images/pokeball.png">
+      <script>
+        const showHint = str => {
+            if (str.length == 0) { // Check if input string is empty
+                document.getElementById("display").innerHTML = "";
+                return;
+            } else {
+                let xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // Checks if request is finished and response is ready
+                        // Checks if status is OK
+                        // Sets suggestions to response data
+                        document.getElementById("display").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "gethint2.php?q=" + str, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
 </head>
 <body>
     <div class="search-container">
         <form autocomplete="off" action="pokemon.php" method="post">
-            <input type="text" name="pokemon" placeholder="Voer een pokémon naam of id in">
+            <input type="text" name="pokemon" placeholder="Voer een pokémon naam of id in" onkeyup="showHint(this.value)">
             <input type="submit" name="zoekPokemon" value="Zoek">
         </form>
+        <div style="margin-top: 1rem;" id="display"></div>
     </div>
-    <a class="back-bttn" href="../index.php">X</a>
+    <a class="back-bttn" href="index.php">X</a>
     <div class="pokemonsContainer">
         <?php
             // Output all data
             foreach ($result as &$data) {
+                // Set pokemon type to global variable
+                $pokemonType = $data["type1"];
                 echo "<div class='pokemon-img'>";
                     $image = $data["fotoUrl"];
                     $imageData = base64_encode(file_get_contents($image));
@@ -150,6 +176,29 @@ if (@isset($_POST["zoekPokemon"])) {
                         setPokemonTypeText($data["type2"]);
                     echo "</div>";
                 echo "</div>";
+            }
+        ?>
+    </div>
+    <div class="related-pokemons">
+        <?php
+            // Query to show related pokemons
+            $queryRelated = "SELECT fotoUrl FROM pokemon WHERE type1 = '$pokemonType' ORDER BY RAND()
+            LIMIT 5";
+
+            // Prepare the query
+            $stmtRelated = $conn->prepare($queryRelated);
+
+            // Execute the query
+            $stmtRelated->execute();
+
+            // Get all data and store it as an array
+            $resultRelated = $stmtRelated->fetchAll(PDO::FETCH_ASSOC);
+
+            // Output data
+            foreach ($resultRelated as &$dataRelated) {
+                $image = $dataRelated["fotoUrl"];
+                $imageData = base64_encode(file_get_contents($image));
+                echo '<img src="data:image/png;base64,'.$imageData.'"><br>';
             }
         ?>
     </div>

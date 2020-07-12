@@ -34,7 +34,6 @@ body {
     flex-direction: row;
     width: 50vw;
     background-color: #fff;
-    border-radius: 5px;
     margin-top: 5rem;
 }
 
@@ -59,8 +58,7 @@ img {
 /* Form Styles */
 .search-container {
     padding: 1rem;
-    margin-top: 0.5rem;
-    border-radius: 10px;
+    margin-top: 1.5rem;
     background-color: #fff;
 }
 
@@ -72,7 +70,6 @@ input {
 
 input[type="text"] {
     border: 1px solid #333;
-    border-radius: 10px;
 }
 
 input[type="submit"] {
@@ -91,3 +88,12 @@ input:focus {
     outline: none;
 }
 /* Form styles */
+
+.related-pokemons {
+    display: flex;
+    flex-direction: row;
+    background-color: #fff;
+    width: 100vw;
+    margin-top: 5rem;
+    justify-content: center;
+}

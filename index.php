@@ -4,10 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pokédex</title>
-    <link rel="stylesheet" href="Styles/style.css">
+    <link rel="stylesheet" href="Styles/styles.css">
     <link rel="icon" 
       type="image/png" 
       href="Images/pokeball.png">
+    <script>
+        const showHint = str => {
+            if (str.length == 0) { // Check if input string is empty
+                document.getElementById("display").innerHTML = "";
+                return;
+            } else {
+                let xmlhttp = new XMLHttpRequest();
+                xmlhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        // Checks if request is finished and response is ready
+                        // Checks if status is OK
+                        // Sets suggestions to response data
+                        document.getElementById("display").innerHTML = this.responseText;
+                    }
+                };
+                xmlhttp.open("GET", "gethint.php?q=" + str, true);
+                xmlhttp.send();
+            }
+        }
+    </script>
 </head>
 <body>
     
@@ -17,11 +37,12 @@
         </div>
         <h1>Pokédex</h1>
         <form autocomplete="off" action="pokemon.php" method="post">
-            <input type="text" name="pokemon" placeholder="Voer een pokémon naam of id in">
+            <input type="text" name="pokemon" placeholder="Voer een pokémon naam of id in" onkeyup="showHint(this.value)">
             <input type="submit" name="zoekPokemon" value="Zoek">
-        </form>
+        </form>    
     </header>
-
+    <!-- Suggestions will be displayed in below div. -->
+    <div id="display"></div>
     <main>
         <div class="container">
             <div class="exeg-img">
@@ -39,7 +60,7 @@
                     amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr,,
                 </p>
                 <br><br><br>
-                <button type="submit">Zoek een pokemon</button>
+                <button type="submit">Bekijk alle Pokemons</button>
             </div>
         </div>
     </main>
